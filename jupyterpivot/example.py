@@ -38,6 +38,7 @@ class HelloWorld(widgets.DOMWidget):
     # Widget properties are defined as traitlets. Any property tagged with `sync=True`
     # is automatically synced to the frontend *any* time it changes in Python.
     # It is synced back to Python from the frontend *any* time the model is touched.
+    url = Unicode().tag(sync=True)
     pivot_options = Dict().tag(sync=True)
 
     def __init__(self, *args, **kwargs):

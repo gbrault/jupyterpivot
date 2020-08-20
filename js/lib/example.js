@@ -1,8 +1,8 @@
 var widgets = require('@jupyter-widgets/base');
 var _ = require('lodash');
 window.$ = window.jQuery = require('jquery');
-require('jquery-ui/jquery-ui.min.js')
-require('style-loader!jquery-ui/jquery-ui.theme.min.css')
+require('jquery-ui/Lib/jquery-ui.min.js')
+require('style-loader!jquery-ui/Lib/jquery-ui.theme.min.css')
 require('pivottable/dist/pivot.js')
 require('style-loader!pivottable/dist/pivot.css')
 require('jquery-ui-touch-punch/jquery.ui.touch-punch.min.js')
@@ -65,11 +65,23 @@ var HelloView = widgets.DOMWidgetView.extend({
         }
         setTimeout(function(){ 
             // create the pivot table
-            this.pivot_options = this.model.get("pivot_options");
-            $.getJSON(this.pivot_options['url'],
+            $.getJSON(this.model.get('url'),
                 function(mps){
+                    onRefresh = function(config) {
+                        var config_copy = JSON.parse(JSON.stringify(config));
+                        //delete some values which are functions
+                        delete config_copy["aggregators"];
+                        delete config_copy["renderers"];
+                        //delete some bulky default values
+                        delete config_copy["rendererOptions"];
+                        delete config_copy["localeStrings"];
+                        delete config_copy["onRefresh"];                        
+                        this.model.set('pivot_options',config_copy)
+                        this.model.save_changes();
+                    }.bind(this);                    
+                    this.model.get('pivot_options')['onRefresh'] = onRefresh
                     $("#pivot_"+this.rdid).pivotUI(mps,
-                               this.pivot_options['settings']);
+                        this.model.get('pivot_options'));
                 }.bind(this)
             );
         }.bind(this), 1);        
