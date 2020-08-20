@@ -28,11 +28,15 @@
   },
   "devDependencies": {
     "webpack": "^3.5.5",
-    "rimraf": "^2.6.1"
+    "rimraf": "^2.6.1",
+    "style-loader": "^1.2.1",
+    "css-loader": "^4.2.1"
   },
   "dependencies": {
     "@jupyter-widgets/base": "^1.1 || ^2 || ^3",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "jquery": "^3.5.1",
+    "pivottable": "^2.23.0"
   },
   "jupyterlab": {
     "extension": "lib/labplugin"
