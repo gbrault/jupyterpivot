@@ -36,7 +36,9 @@
     "@jupyter-widgets/base": "^1.1 || ^2 || ^3",
     "lodash": "^4.17.4",
     "jquery": "^3.5.1",
-    "pivottable": "^2.23.0"
+    "jquery-ui": "^1.12.1",
+    "pivottable": "^2.23.0",
+    "jquery-ui-touch-punch": "^0.2.3"
   },
   "jupyterlab": {
     "extension": "lib/labplugin"
