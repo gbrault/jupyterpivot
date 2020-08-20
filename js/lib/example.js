@@ -1,8 +1,8 @@
 var widgets = require('@jupyter-widgets/base');
 var _ = require('lodash');
 window.$ = window.jQuery = require('jquery');
-require('jquery-ui/Lib/jquery-ui.min.js')
-require('style-loader!jquery-ui/Lib/jquery-ui.theme.min.css')
+require('jquery-ui-dist/jquery-ui.min.js')
+require('style-loader!jquery-ui-dist/jquery-ui.theme.min.css')
 require('pivottable/dist/pivot.js')
 require('style-loader!pivottable/dist/pivot.css')
 require('jquery-ui-touch-punch/jquery.ui.touch-punch.min.js')
