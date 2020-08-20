@@ -1,10 +1,11 @@
 var widgets = require('@jupyter-widgets/base');
 var _ = require('lodash');
 window.$ = window.jQuery = require('jquery');
-require('jquery-ui')
+require('jquery-ui/jquery-ui.min.js')
+require('style-loader!jquery-ui/jquery-ui.theme.min.css')
 require('pivottable/dist/pivot.js')
 require('style-loader!pivottable/dist/pivot.css')
-require('jquery-ui-touch-punch/jquery-ui-touch-punch.min.js')
+require('jquery-ui-touch-punch/jquery.ui.touch-punch.min.js')
 
 // See example.py for the kernel counterpart to this file.
 
@@ -45,7 +46,7 @@ var HelloView = widgets.DOMWidgetView.extend({
         // Observe changes in the value traitlet in Python, and define
         // a custom callback.
         // this.model.on('change:value', this.value_changed, this);
-        this.initilize_pivot()
+        this.initialize_pivot()
     },
     /*
     value_changed: function() {
@@ -69,7 +70,7 @@ var HelloView = widgets.DOMWidgetView.extend({
                 function(mps){
                     $("#pivot_"+this.rdid).pivotUI(mps,
                                this.pivot_options['settings']);
-                }
+                }.bind(this)
             );
         }.bind(this), 1);        
 
