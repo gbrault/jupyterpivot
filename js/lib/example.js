@@ -63,10 +63,32 @@ var HelloView = widgets.DOMWidgetView.extend({
             this.rdid = Math.floor(Math.random() * Math.floor(1000));
             this.pivot_elm = $("<div id='pivot_"+ this.rdid +"'>").appendTo(this.$el);
         }
-        setTimeout(function(){ 
-            // create the pivot table
-            $.getJSON(this.model.get('url'),
-                function(mps){
+        if (this.model.get('url') != "") {
+            setTimeout(function(){ 
+                // create the pivot table
+                $.getJSON(this.model.get('url'),
+                    function(mps){
+                        onRefresh = function(config) {
+                            var config_copy = JSON.parse(JSON.stringify(config));
+                            //delete some values which are functions
+                            delete config_copy["aggregators"];
+                            delete config_copy["renderers"];
+                            //delete some bulky default values
+                            delete config_copy["rendererOptions"];
+                            delete config_copy["localeStrings"];
+                            delete config_copy["onRefresh"];                        
+                            this.model.set('pivot_options',config_copy)
+                            this.model.save_changes();
+                        }.bind(this);                    
+                        this.model.get('pivot_options')['onRefresh'] = onRefresh
+                        $("#pivot_"+this.rdid).pivotUI(mps,
+                            this.model.get('pivot_options'));
+                    }.bind(this)
+                );
+            }.bind(this), 1);
+        } else if (this.model.get('json') !=null) {
+            setTimeout(function(){ 
+                // create the pivot table
                     onRefresh = function(config) {
                         var config_copy = JSON.parse(JSON.stringify(config));
                         //delete some values which are functions
@@ -80,11 +102,11 @@ var HelloView = widgets.DOMWidgetView.extend({
                         this.model.save_changes();
                     }.bind(this);                    
                     this.model.get('pivot_options')['onRefresh'] = onRefresh
-                    $("#pivot_"+this.rdid).pivotUI(mps,
+                    $("#pivot_"+this.rdid).pivotUI(JSON.parse(this.model.get('json')),
                         this.model.get('pivot_options'));
                 }.bind(this)
-            );
-        }.bind(this), 1);        
+                , 1);            
+        }   
 
     }
 
