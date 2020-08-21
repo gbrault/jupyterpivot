@@ -152,7 +152,7 @@ setup_args = dict(
     },
     author='Gilbert Brault',
     author_email='gbrault@seadev.org',
-    url='https://github.com/seadev.org/jupyterpivot',
+    url='https://github.com/gbrault/jupyterpivot',
     keywords=[
         'ipython',
         'jupyter',
@@ -164,14 +164,7 @@ setup_args = dict(
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
         'Topic :: Multimedia :: Graphics',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
     ],
 )
 
